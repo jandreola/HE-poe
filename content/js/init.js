@@ -1,7 +1,7 @@
 (function(){
 
     var options = {
-        scrollSize: 300,
+        scrollSize: 100,
         initialFrame:0,
         frames: [
             {start: 0, end: 3},
