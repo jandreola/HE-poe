@@ -45,7 +45,7 @@ gulp.task('vendor', function(){
 
     return gulp.src(dependencies)
     .pipe($.concat('vendor.js'))
-    .pipe(gulp.dest('content/js/'));
+    .pipe(gulp.dest('./'));
 });
 
 /**
@@ -53,14 +53,13 @@ gulp.task('vendor', function(){
  */
 gulp.task('script', function(){
     return gulp.src([
-        'content/js/**/*.js',
-        '!content/js/main.js',
-        '!content/js/vendor.js'
+        'content/js/**/!(init)*.js',
+        'content/js/init.js',
     ])
     .pipe($.jshint())
     .pipe($.jshint.reporter('default'))
     .pipe($.concat('main.js'))
-    .pipe(gulp.dest('content'));
+    .pipe(gulp.dest('./'));
 });
 
 

@@ -3,12 +3,12 @@
  * Manage sync between page sections and video clips playback.
  */
 var KFS = function(options) {
-
     /*
      * Default options
      */
     var settings = {
-        scrollSize: 100
+        scrollSize: 100,   // Amount to scroll before switch frames
+        selector: '.frame' // Individual frame selector
     };
     $.extend(settings, options);
     
@@ -17,15 +17,21 @@ var KFS = function(options) {
      * Set body height based on number of sections on page
      */
     function setBodyHeight() {
-        var totalFrames = $('.frames').length;
+        var totalFrames = $(settings.selector).length,
+            windowHeight = $(window).height();
+
+        windowHeight += totalFrames * settings.scrollSize;
+        $('body').height(windowHeight);
     }
 
-    console.log(settings);
+    function init(){
+        setBodyHeight();
+    }
+
+    return init();
     
 };
 
-KFS({scrollSize: 200});
-KFS();
 
 
 
