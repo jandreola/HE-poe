@@ -52,8 +52,17 @@ var KFS = function(options) {
     /*
      * 
      */
+    var loop;
     function selectFrame(frame){
+        clearInterval(loop)
+        $(settings.selector).removeClass('in');
+        $(settings.selector + ':nth-child('+ frame + 1 +')').addClass('in');
+        var fOptions = settings.frames[frame];
+        video.currentTime = fOptions.start;
         video.play();
+        loop = setInterval(function(){
+            video.currentTime = fOptions.start;
+        }, fOptions.end * 1000);
     }
 
     function init(){
@@ -61,7 +70,7 @@ var KFS = function(options) {
 
         setBodyHeight();
         detectScrollDirection();
-        selectFrame(1);
+        selectFrame(0);
     }
 
     return init();
