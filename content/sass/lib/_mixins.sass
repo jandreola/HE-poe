@@ -1,0 +1,8 @@
+@mixin radial-gradient($from, $to, $edge)
+    background: -moz-radial-gradient(center, circle cover, $from 0%, $to $edge)
+    background: -webkit-gradient(radial, center center, 0px, center center, $edge, color-stop(0%, $from), color-stop($edge, $to))
+    background: -webkit-radial-gradient(center, circle cover, $from 0%, $to $edge)
+    background: -o-radial-gradient(center, circle cover, $from 0%, $to $edge)
+    background: -ms-radial-gradient(center, circle cover, $from 0%, $to $edge)
+    background: radial-gradient(center, circle cover, $from 0%, $to $edge)
+    background-color: $from

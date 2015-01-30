@@ -411,7 +411,10 @@ h1, h2, p {
 }
 
 body.full-features {
-  background-color: #000;
+  background: -webkit-gradient(radial, center center, 0px, center center, 50%, color-stop(0%, #99989A), color-stop(50%, #585758));
+  background: -webkit-radial-gradient(center, circle cover, #99989A 0%, #585758 50%);
+  background: radial-gradient(center, circle cover, #99989A 0%, #585758 50%);
+  background-color: #99989A;
 }
 
 .btn {
@@ -452,10 +455,14 @@ body.full-features {
   margin-right: 10px;
   border-right: 1px solid #fff;
 }
+.nav-bar li.active a {
+  background-color: #ccc;
+}
 .nav-bar li:last-child {
   border-right: none;
 }
 .nav-bar a:link, .nav-bar a:visited {
+  padding: 15px;
   text-decoration: none;
   color: #fff;
 }

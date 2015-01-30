@@ -87,7 +87,7 @@ var KFS = function(options) {
              * or over scroll number
              */
             var frame = Math.ceil(position / settings.scrollSize);
-            frame -= 1;
+            frame -= 1; // match array position
             selectFrame(frame);
     }
 
@@ -97,12 +97,20 @@ var KFS = function(options) {
      */
     var loop,
         currentFrame = settings.initialFrame;
-    function selectFrame(frame){
+    function selectFrame(frame, init){
+        
+        // Avoid retrigger in case is the same frame
+        if(frame === currentFrame && !init){
+            init = false;
+            return false;
+        }
+
         var nthChild = Number(frame) + 1; //Frame selector
         clearInterval(loop); // Clear any previous intervals
 
         // Switch 'in' class from previous frame to new frame
         $(settings.selector).removeClass('in');
+        $('[data-frame-selector]').removeClass('active');
 
         var gap = calculateGap(currentFrame, frame);
         video.currentTime = settings.frames[currentFrame].end;
@@ -110,6 +118,7 @@ var KFS = function(options) {
         // Set video start, end and loops it
         setTimeout(function(){
             $(settings.selector + ':nth-child('+ nthChild +')').addClass('in');
+            $('[data-frame-selector='+ frame +']').addClass('active');
             var fOptions = settings.frames[frame];
             video.currentTime = fOptions.start;
             loop = setInterval(function(){
@@ -132,7 +141,7 @@ var KFS = function(options) {
         setBodyHeight();
         bindMenus();
         detectScrollDirection();
-        selectFrame(settings.initialFrame);
+        selectFrame(settings.initialFrame, true);
         video.play();
     }
 
