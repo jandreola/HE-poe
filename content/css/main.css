@@ -407,11 +407,11 @@ body.full-features {
 }
 
 h1, h2, p {
-  color: white;
+  color: #fff;
 }
 
 body.full-features {
-  background-color: black;
+  background-color: #000;
 }
 
 .btn {
@@ -422,8 +422,8 @@ body.full-features {
   text-decoration: none;
 }
 .btn.btn-primary {
-  border: 2px solid white;
-  color: white;
+  border: 2px solid #fff;
+  color: #fff;
 }
 
 .nav-bar {
@@ -450,14 +450,14 @@ body.full-features {
   display: inline-block;
   padding-right: 10px;
   margin-right: 10px;
-  border-right: 1px solid white;
+  border-right: 1px solid #fff;
 }
 .nav-bar li:last-child {
   border-right: none;
 }
 .nav-bar a:link, .nav-bar a:visited {
   text-decoration: none;
-  color: white;
+  color: #fff;
 }
 .nav-bar a:hover, .nav-bar a:active {
   text-decoration: underline;
@@ -492,9 +492,15 @@ body.full-features {
           transition: all 2s ease;
   opacity: 0;
   padding: 20px;
+  -webkit-transform: scale(0.1);
+      -ms-transform: scale(0.1);
+          transform: scale(0.1);
 }
 .frame.in {
   opacity: 1;
+  -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+          transform: scale(1);
 }
 .frame h2 {
   position: absolute;

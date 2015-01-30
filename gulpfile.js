@@ -75,10 +75,11 @@ gulp.task('style', function() {
     return gulp.src('./content/sass/main.sass')
     .pipe($.sass({
         'style': 'expanded',
+        'sourcemap=none': true,
         'container':'gulp-ruby-sass'
     }))
     .pipe($.autoprefix('last 2 versions', '> 1%', 'ie 8'))
-    .pipe(gulp.dest('./content/css/'))
+    .pipe(gulp.dest('./content/css/'));
 });
 
 //////////////////
@@ -87,13 +88,13 @@ gulp.task('style', function() {
 gulp.task('serve', function (cb) {
       $.browserSync({
         files: ['./**/*.{js,css,html}'],
-        port: 8001,
+        port: 8002,
         notify: true,
         server: {
           baseDir: './',
           index: 'index.html'
         }
-      }, cb)
+      }, cb);
     });
 
 
