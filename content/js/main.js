@@ -8,11 +8,11 @@
 
 
     function nextFrame(frame) {
-        $('.frame-one').hide();
-        $('.frame-two').css({'left': 0});
+        $('.frame-one').removeClass('in');
         clearInterval(frameOne);
         video.currentTime = 2;
         setTimeout(function(){
+            $('.frame-two').addClass('in');
             setInterval(function(){
                 video.currentTime = 5;
             }, 4000);

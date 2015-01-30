@@ -5,13 +5,54 @@
     <title>Video Loop</title>
     <link rel="stylesheet" href="/content/css/main.css">
 </head>
-<body>
-    <video class="frame" id="video" src="/content/videos/video.mp4"></video>
-    <div class="frame frame-one"><h1>FRAME ONE</h1></div>
-    <div class="frame frame-two"><h1>FRAME TWO</h1></div>
-    <div class="frame frame-three"></div>
+<body class="full-features">
+    <!-- <header>
+        <h1>Brand</h1>
+        <nav>
+            <ul>
+                <li><a href="/item">Menu item</a></li>
+                <li><a href="/item">Menu item</a></li>
+                <li><a href="/item">Menu item</a></li>
+                <li><a href="/item">Menu item</a></li>
+            </ul>
+        </nav>
+    </header> -->
+    <main>
+        <div class="video-container">
+            <video class="video" id="video" src="/content/videos/video.mp4"></video>
+        </div>
+        <div class="frames-container">
+            <section class="frame frame-one in">
+                <h2>Frame One content</h2>
+                <div class="content">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+                    <a href="/" class="btn btn-primary">More Info</a>
+                </div>
+            </section>
+            <section class="frame frame-two">
+                <h2>Frame Two content</h2>
+                <div class="content">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+                    <a href="/" class="btn btn-primary">More Info</a>
+                </div>
+            </section>
+            <section class="frame frame-three">
+                <h2>Frame Three content</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </section>
+        </div>
+    </main>
+    <footer>
+        Copyrights &copy; 2015
+    </footer>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+    <script src="/content/js/vendor.js"></script>
     <script src="/content/js/main.js"></script>
 </body>
 </html>
