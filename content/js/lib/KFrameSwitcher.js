@@ -8,10 +8,19 @@ var KFS = function(options) {
      */
     var settings = {
         scrollSize: 100,   // Amount to scroll before switch frames
-        selector: '.frame' // Individual frame selector
+        selector: '.frame', // Individual frame selector
+        videoId: 'video',
+        frames: [] // MUST be passed
     };
     $.extend(settings, options);
-    
+
+    var video = document.getElementById(settings.videoId);
+
+    function testOptions(options){
+        if(!options.frames.length){
+            console.error('No video clips defined.');
+        }
+    }
 
     /*
      * Set body height based on number of sections on page
@@ -24,8 +33,35 @@ var KFS = function(options) {
         $('body').height(windowHeight);
     }
 
+    /*
+     * Improved scroll event with current position and direction
+     */
+    function detectScrollDirection(){
+        var lastScrollTop = 0;
+        $(window).on('scroll', function(){
+            var st = $(this).scrollTop();
+            if (st > lastScrollTop){
+                $(window).trigger('scroll:down', st);
+            } else {
+                $(window).trigger('scroll:up', st);
+            }
+            lastScrollTop = st;
+        });
+    }
+
+    /*
+     * 
+     */
+    function selectFrame(frame){
+        video.play();
+    }
+
     function init(){
+        testOptions(settings);
+
         setBodyHeight();
+        detectScrollDirection();
+        selectFrame(1);
     }
 
     return init();
@@ -38,11 +74,6 @@ var KFS = function(options) {
 
 
 // (function(){
-//     var totalLength = $('.frame').length;
-//     var increment = 100;
-//     var windowHeight = $(window).height();
-//     $('body').height(windowHeight + (totalLength * increment));
-
 //     var video = document.getElementById('video');
 //     video.play();
 
@@ -64,16 +95,5 @@ var KFS = function(options) {
 //         // }, 3000);
 //     }
 
-//     var lastScrollTop = 0;
-//     $(window).on('scroll', function(){
-//         var st = $(this).scrollTop();
-//         if (st > lastScrollTop){
-//             var frame = st / increment;
-//             frame = Math.ceil(frame);
-//             nextFrame(frame);
-//         } else {
-//           // upscroll code
-//         }
-//         lastScrollTop = st;
-//     });
+    
 // }());
