@@ -10,6 +10,7 @@ var KFS = function(options) {
         scrollSize: 100,   // Amount to scroll before switch frames
         selector: '.frame', // Individual frame selector
         videoId: 'video',
+        initialFrame: 0,
         frames: [] // MUST be passed
     };
     $.extend(settings, options);
@@ -50,35 +51,67 @@ var KFS = function(options) {
     }
 
     /*
-     * 
+     * Changes class to active section and plays the video
+     * on the right clip
      */
-    var loop;
+    var loop,
+        currentFrame = settings.initialFrame;
     function selectFrame(frame){
-        clearInterval(loop)
+        var nthChild = Number(frame) + 1; //Frame selector
+        clearInterval(loop); // Clear any previous intervals
+
+        // Switch 'in' class from previous frame to new frame
         $(settings.selector).removeClass('in');
-        $(settings.selector + ':nth-child('+ frame + 1 +')').addClass('in');
-        var fOptions = settings.frames[frame];
-        video.currentTime = fOptions.start;
-        video.play();
-        loop = setInterval(function(){
+
+        var gap = calculateGap(currentFrame, frame);
+        video.currentTime = settings.frames[currentFrame].end;
+        
+        setTimeout(function(){
+            $(settings.selector + ':nth-child('+ nthChild +')').addClass('in');
+            var fOptions = settings.frames[frame];
             video.currentTime = fOptions.start;
-        }, fOptions.end * 1000);
+            loop = setInterval(function(){
+                video.currentTime = fOptions.start;
+            }, fOptions.end * 1000);
+            
+            currentFrame = frame;
+        }, gap * 1000);
+
+        // Set video start, end and loops it
+
+    }
+
+    /*
+     * Calculates gap in seconds between current frame
+     * and next frame, this is basically the transition
+     * between frames
+     */
+    function calculateGap(current, next){
+        var frames = settings.frames;
+        var gap = frames[next].start - frames[current].end;
+
+        return gap;
+    }
+
+    function bindMenus(){
+        $('#main-nav').on('click', 'li', function(){
+            var frame = $(this).attr('data-frame-selector');
+            selectFrame(frame);
+        });
     }
 
     function init(){
         testOptions(settings);
-
         setBodyHeight();
+        bindMenus();
         detectScrollDirection();
-        selectFrame(0);
+        selectFrame(settings.initialFrame);
+        video.play();
     }
 
     return init();
     
 };
-
-
-
 
 
 
@@ -109,12 +142,14 @@ var KFS = function(options) {
 (function(){
 
     var options = {
-        scrollSize: 100,
+        scrollSize: 300,
+        initialFrame:0,
         frames: [
             {start: 0, end: 3},
             {start: 21, end: 6},
         ]
     };
+
     KFS(options);
     
 }());
